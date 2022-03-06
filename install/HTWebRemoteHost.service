@@ -1,0 +1,9 @@
+[Unit]
+Description=HTWebRemoteHost
+After=multi-user.target
+
+[Service]
+ExecStart=/opt/HTWebRemoteHost/HTWebRemoteHost
+
+[Install]
+WantedBy=multi-user.target
