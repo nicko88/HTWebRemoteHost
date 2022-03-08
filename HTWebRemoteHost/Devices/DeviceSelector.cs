@@ -39,6 +39,10 @@ namespace HTWebRemoteHost.Devices
 
             if (devName == "win") { }
             else if (devName == "keys") { }
+            else if (devName == "wol")
+            {
+                WOLControl.RunCmd(cmd);
+            }
             else if (devName == "Comment") { }
             else
             {
@@ -178,6 +182,7 @@ namespace HTWebRemoteHost.Devices
             deviceNames.Add("Comment");
             deviceNames.Add("keys");
             deviceNames.Add("win");
+            deviceNames.Add("wol");
 
             try
             {

@@ -9,7 +9,7 @@ namespace HTWebRemoteHost.Devices
         private Socket socket;
         private IPEndPoint remoteEndPoint;
 
-        public SocketConnection(string IP, string port, SocketType socketType, ProtocolType protocolType)
+        public SocketConnection(string IP, string defaultPort, SocketType socketType, ProtocolType protocolType)
         {
             try
             {
@@ -24,15 +24,15 @@ namespace HTWebRemoteHost.Devices
                 }
                 else
                 {
-                    iPort = Convert.ToInt32(port, 10);
+                    iPort = Convert.ToInt32(defaultPort, 10);
                 }
 
                 IPAddress remoteIPAddress = IPAddress.Parse(IPport[0]);
                 remoteEndPoint = new IPEndPoint(remoteIPAddress, iPort);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                Util.ErrorHandler.SendError($"Cannot setup connection for {IP}:{port} {protocolType}\n\n{e.Message}");
+                Util.ErrorHandler.SendError($"Cannot setup connection for {remoteEndPoint.Address}:{remoteEndPoint.Port} {socket.ProtocolType}\n\n{e.Message}");
             }
         }
 
