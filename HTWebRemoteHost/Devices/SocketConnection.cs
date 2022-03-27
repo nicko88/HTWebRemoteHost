@@ -42,7 +42,7 @@ namespace HTWebRemoteHost.Devices
             {
                 socket.Connect(remoteEndPoint);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Util.ErrorHandler.SendError($"Cannot connect to device at {remoteEndPoint.Address}:{remoteEndPoint.Port} {socket.ProtocolType}\n\n{e.Message}");
             }
@@ -56,7 +56,7 @@ namespace HTWebRemoteHost.Devices
             {
                 socket.Send(data);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Util.ErrorHandler.SendError($"Cannot send Command: {data} to device at {remoteEndPoint.Address}:{remoteEndPoint.Port} {socket.ProtocolType}\n\n{e.Message}");
             }
@@ -82,6 +82,7 @@ namespace HTWebRemoteHost.Devices
         public void CloseSocket()
         {
             socket?.Close();
+            socket?.Dispose();
         }
     }
 }

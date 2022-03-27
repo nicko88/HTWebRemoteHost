@@ -14,12 +14,12 @@ namespace HTWebRemoteHost.Devices.Controllers
                 {
                     string newLine = "";
 
-                    if(cmd.Contains("<CR>"))
+                    if (cmd.Contains("<CR>"))
                     {
                         newLine = "\r";
                         cmd = cmd.Replace("<CR>", "");
                     }
-                    if(cmd.Contains("<LF>"))
+                    if (cmd.Contains("<LF>"))
                     {
                         newLine = "\n";
                         cmd = cmd.Replace("<LF>", "");
@@ -34,9 +34,10 @@ namespace HTWebRemoteHost.Devices.Controllers
                     sp.Write(cmd + newLine);
                     Thread.Sleep(100);
                     sp.Close();
+                    sp.Dispose();
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Util.ErrorHandler.SendError($"Cannot connect to {COMport}\n\n{e.Message}");
             }

@@ -139,7 +139,7 @@ namespace HTWebRemoteHost
                     htmlPage = ErrorHandler.GetErrors();
                     break;
                 case "/version":
-                    htmlPage = "v" + Assembly.GetExecutingAssembly().GetName().Version.ToString().Replace(".0", "");
+                    htmlPage = "v" + Assembly.GetExecutingAssembly().GetName().Version.ToString().TrimEnd(new char[] { '.', '0' });
                     break;
                 case "/rebootpc":
                     "reboot".Bash();
