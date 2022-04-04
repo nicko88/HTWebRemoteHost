@@ -31,6 +31,7 @@ namespace HTWebRemoteHost.Devices
                                                                     "oppo",
                                                                     "dbox",
                                                                     "hdfury",
+                                                                    "minidsp-rs",
                                                                     "rs232",
                                                                     "httpget",
                                                                     "mqtt" };
@@ -150,6 +151,9 @@ namespace HTWebRemoteHost.Devices
                 case "hdfury":
                     HDFuryControl.RunCmd(IP, cmd);
                     break;
+                case "minidsp-rs":
+                    MiniDSPrsControl.RunCmd(IP, cmd, param);
+                    break;
                 case "rs232":
                     RS232Control.RunCmd($"/dev/{specialData}", cmd);
                     break;
@@ -178,6 +182,12 @@ namespace HTWebRemoteHost.Devices
                         break;
                     case "storm":
                         returnQuery = (string)Type.GetType("HTWebRemoteHost.Devices.Controllers.StormControl").GetMethod(values[1]).Invoke(null, new object[] { IP });
+                        break;
+                    case "htp1":
+                        returnQuery = (string)Type.GetType("HTWebRemoteHost.Devices.Controllers.HTP1Control").GetMethod(values[1]).Invoke(null, new object[] { IP });
+                        break;
+                    case "minidsp-rs":
+                        returnQuery = (string)Type.GetType("HTWebRemoteHost.Devices.Controllers.MiniDSPrsControl").GetMethod(values[1]).Invoke(null, new object[] { IP });
                         break;
                     default:
                         break;

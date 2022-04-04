@@ -6,9 +6,9 @@
     <Authors>nicko88</Authors>
     <Copyright>nicko88</Copyright>
     <RepositoryUrl>https://github.com/nicko88/HTWebRemoteHost</RepositoryUrl>
-    <AssemblyVersion>1.6.1.0</AssemblyVersion>
-    <FileVersion>1.6.1.0</FileVersion>
-    <Version>1.6.1</Version>
+    <AssemblyVersion>1.6.2.0</AssemblyVersion>
+    <FileVersion>1.6.2.0</FileVersion>
+    <Version>1.6.2</Version>
     <AssemblyName>HTWebRemoteHost</AssemblyName>
     <RootNamespace>HTWebRemoteHost</RootNamespace>
   </PropertyGroup>
