@@ -45,5 +45,48 @@ namespace HTWebRemoteHost.Util
             }
             return "IPerror";
         }
+
+        public static string ConvertLegacyColor(string color)
+        {
+            if (color.StartsWith("#"))
+            {
+                return color;
+            }
+            else
+            {
+                string colorVal = "#808080";
+                switch (color)
+                {
+                    case "Blue":
+                        colorVal = "#007BFF";
+                        break;
+                    case "Green":
+                        colorVal = "#28A745";
+                        break;
+                    case "Red":
+                        colorVal = "#DC3545";
+                        break;
+                    case "Orange":
+                        colorVal = "#FFC107";
+                        break;
+                    case "Teal":
+                        colorVal = "#17A2C8";
+                        break;
+                    case "Gray":
+                        colorVal = "#6C757D";
+                        break;
+                    case "White":
+                        colorVal = "#F8F9FA";
+                        break;
+                    case "Black":
+                        colorVal = "#343A40";
+                        break;
+                    default:
+                        break;
+                }
+
+                return colorVal;
+            }
+        }
     }
 }
