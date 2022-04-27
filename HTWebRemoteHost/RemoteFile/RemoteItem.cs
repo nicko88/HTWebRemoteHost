@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HTWebRemoteHost.RemoteFile
 {
-    class RemoteItem
+    public class RemoteItem
     {
         public enum RemoteItemType
         {
@@ -20,10 +21,11 @@ namespace HTWebRemoteHost.RemoteFile
         public List<Command> Commands { get; set; }
 
         //create new group
-        public RemoteItem(string groupName)
+        public RemoteItem(string groupName, string textColor)
         {
             ItemType = RemoteItemType.Group;
             Label = groupName;
+            Color = textColor;
         }
 
         //create new button
@@ -54,10 +56,13 @@ namespace HTWebRemoteHost.RemoteFile
         {
             if (Commands != null)
             {
-                foreach (Command cmd in Commands)
+                Task.Run(() =>
                 {
-                    cmd.SendCommand();
-                }
+                    foreach (Command cmd in Commands)
+                    {
+                        cmd.SendCommand();
+                    }
+                });
             }
         }
 
@@ -69,7 +74,7 @@ namespace HTWebRemoteHost.RemoteFile
                     return $"Group={Label}";
                 case RemoteItemType.Button:
                     string confirm = "";
-                    if(ConfirmPopup)
+                    if (ConfirmPopup)
                     {
                         confirm = ",Popup";
                     }

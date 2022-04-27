@@ -129,6 +129,9 @@ namespace HTWebRemoteHost
                 case "/serial":
                     htmlPage = GetSerialPorts();
                     break;
+                case "/deleteremotes":
+                    DeleteRemotes();
+                    break;
                 case "/syncfile":
                     SaveFile(request);
                     break;
@@ -164,6 +167,18 @@ namespace HTWebRemoteHost
             }
 
             return htmlPage;
+        }
+
+        private void DeleteRemotes()
+        {
+            try
+            {
+                foreach (string file in Directory.GetFiles(ConfigHelper.WorkingPath, "HTWebRemoteButtons*"))
+                {
+                    File.Delete(file);
+                }
+            }
+            catch { }
         }
 
         private void SaveFile(HttpListenerRequest request)
