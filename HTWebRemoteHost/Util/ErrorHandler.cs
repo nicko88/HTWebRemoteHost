@@ -10,6 +10,11 @@ namespace HTWebRemoteHost.Util
             File.AppendAllLines(Path.Combine(ConfigHelper.WorkingPath, "errorlog.txt"), new[] { $"[{DateTime.Now:G}] : {error}" + Environment.NewLine });
         }
 
+        public static void SendMsg(string msg)
+        {
+            File.AppendAllLines(Path.Combine(ConfigHelper.WorkingPath, "errorlog.txt"), new[] { $"[{DateTime.Now:G}] : {msg}" + Environment.NewLine });
+        }
+
         public static string GetErrors()
         {
             try

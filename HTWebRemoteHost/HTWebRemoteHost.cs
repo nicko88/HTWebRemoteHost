@@ -109,8 +109,7 @@ namespace HTWebRemoteHost
                 string remoteID = request.QueryString["remoteID"];
                 Remote remote = RemoteJSONLoader.LoadRemoteJSON(remoteID);
 
-                Thread commandThread = new Thread(remote.RemoteItems[Convert.ToInt32(btnIndex)].RunButtonCommands);
-                commandThread.Start();
+                remote.RemoteItems[Convert.ToInt32(btnIndex)].RunButtonCommands();
             }
 
             return queryData;

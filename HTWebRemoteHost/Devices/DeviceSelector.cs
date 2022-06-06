@@ -23,11 +23,13 @@ namespace HTWebRemoteHost.Devices
                                                                     "storm",
                                                                     "htp1",
                                                                     "anthem",
+                                                                    "lyngdorf",
                                                                     "jvc",
                                                                     "epson",
                                                                     "benq",
                                                                     "christie",
                                                                     "panaproj",
+                                                                    "lgwebos",
                                                                     "oppo",
                                                                     "dbox",
                                                                     "hdfury",
@@ -130,6 +132,9 @@ namespace HTWebRemoteHost.Devices
                 case "anthem":
                     AnthemControl.RunCmd(IP, cmd);
                     break;
+                case "lyngdorf":
+                    LyngdorfControl.RunCmd(IP, cmd, param);
+                    break;
                 case "jvc":
                     JVCControl.RunCmd(IP, cmd, param, specialData);
                     break;
@@ -143,6 +148,9 @@ namespace HTWebRemoteHost.Devices
                     ChristieControl.RunCmd(IP, cmd);
                     break;
                 case "panaproj":
+                    PanaProjControl.RunCmd(IP, cmd, param);
+                    break;
+                case "lgwebos":
                     PanaProjControl.RunCmd(IP, cmd, param);
                     break;
                 case "oppo":
@@ -200,6 +208,9 @@ namespace HTWebRemoteHost.Devices
                         break;
                     case "minidsp-rs":
                         returnQuery = (string)Type.GetType("HTWebRemoteHost.Devices.Controllers.MiniDSPrsControl").GetMethod(values[1]).Invoke(null, new object[] { IP });
+                        break;
+                    case "lyngdorf":
+                        returnQuery = (string)Type.GetType("HTWebRemoteHost.Devices.Controllers.LyngdorfControl").GetMethod(values[0]).Invoke(null, new object[] { IP, values[1] });
                         break;
                     default:
                         break;
