@@ -151,7 +151,7 @@ namespace HTWebRemoteHost.Devices
                     PanaProjControl.RunCmd(IP, cmd, param);
                     break;
                 case "lgwebos":
-                    PanaProjControl.RunCmd(IP, cmd, param);
+                    LGwebOSControl.RunCmd(IP, cmd, param);
                     break;
                 case "oppo":
                     OppoControl.RunCmd(IP, cmd, param);
