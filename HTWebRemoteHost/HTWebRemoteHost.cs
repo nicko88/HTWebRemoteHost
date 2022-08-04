@@ -150,7 +150,7 @@ namespace HTWebRemoteHost
                     break;
             }
 
-            if (request.RawUrl.Length == 2)
+            if (request.RawUrl.Length == 2 || request.RawUrl.Length == 3)
             {
                 RemoteID = request.RawUrl.Trim('/');
             }

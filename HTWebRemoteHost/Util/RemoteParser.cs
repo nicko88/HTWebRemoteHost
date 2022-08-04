@@ -1,9 +1,9 @@
 ﻿using HTWebRemoteHost.RemoteFile;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace HTWebRemoteHost.Util
@@ -30,18 +30,14 @@ namespace HTWebRemoteHost.Util
 
             try
             {
-                string[] files = Directory.GetFiles(ConfigHelper.WorkingPath, "HTWebRemoteButtons*");
+                string[] remoteFiles = Directory.GetFiles(ConfigHelper.WorkingPath, "HTWebRemoteButtons*").CustomSort().ToArray();
 
-                if (files.Length > 1)
+                if (remoteFiles.Length > 1)
                 {
-                    List<string> filesList = new List<string>();
-                    filesList.AddRange(files);
-                    filesList.Sort();
-
                     sb.AppendLine(@"<div class=""nav-container"">");
                     sb.AppendLine(@"<ul class=""nav nav-tabs sticky-top"">");
 
-                    foreach (string file in filesList)
+                    foreach (string file in remoteFiles)
                     {
                         if (file.Contains(".json"))
                         {
