@@ -27,10 +27,24 @@ then
 	systemctl enable HTWebRemoteHost.service
 	service HTWebRemoteHost start
 	
+	rm /tmp/$file
+fi
+
+read -p "Do you also want to install Android Debug Bridge (adb) for Nvidia Shield control? [y/n]" -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
 	apt-get update
 	apt-get install -y adb
 	
-	rm /tmp/$file
+	codename=$(grep -Po 'VERSION="[0-9]+ \(\K[^)]+' /etc/os-release)
+	echo "deb [trusted=yes] http://deb.debian.org/debian ${codename}-backports main" > /etc/apt/sources.list.d/backports.list
+	
+	apt-get update
+	apt-get install -y adb/"${codename}-backports"
+	apt-get autoremove -y
+	
+	rm /etc/apt/sources.list.d/backports.list
 fi
 
 rm install.sh
