@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using System.Linq;
-using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Reflection;
 using System.Diagnostics;
@@ -37,15 +37,22 @@ namespace HTWebRemoteHost.Util
 
         public static string GetLocalIPAddress()
         {
-            IPHostEntry host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (IPAddress ip in host.AddressList)
+            string IP = "IPError";
+            foreach (NetworkInterface item in NetworkInterface.GetAllNetworkInterfaces())
             {
-                if (ip.AddressFamily == AddressFamily.InterNetwork && !ip.ToString().StartsWith("127"))
+                if ((item.NetworkInterfaceType == NetworkInterfaceType.Ethernet || item.NetworkInterfaceType == NetworkInterfaceType.Wireless80211) &&
+                    !item.Description.ToLower().Contains("virtual") && !item.Name.ToLower().Contains("virtual") && item.OperationalStatus == OperationalStatus.Up)
                 {
-                    return ip.ToString();
+                    foreach (UnicastIPAddressInformation ip in item.GetIPProperties().UnicastAddresses)
+                    {
+                        if (ip.Address.AddressFamily == AddressFamily.InterNetwork)
+                        {
+                            IP = ip.Address.ToString();
+                        }
+                    }
                 }
             }
-            return "IPerror";
+            return IP;
         }
 
         public static string ConvertLegacyColor(string color)

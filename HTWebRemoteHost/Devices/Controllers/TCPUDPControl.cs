@@ -38,6 +38,8 @@ namespace HTWebRemoteHost.Devices.Controllers
             {
                 Thread.Sleep(100);
                 Socket.SendData(cmdBytes);
+                Thread.Sleep(100);
+
                 Socket.CloseSocket();
             }
         }

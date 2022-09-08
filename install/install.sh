@@ -30,7 +30,7 @@ then
 	rm /tmp/$file
 fi
 
-read -p "Do you also want to install Android Debug Bridge (adb) for Nvidia Shield control? [y/n]" -n 1 -r
+read -p "Do you want to INSTALL Android Debug Bridge (adb) for Nvidia Shield control? [y/n]" -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
