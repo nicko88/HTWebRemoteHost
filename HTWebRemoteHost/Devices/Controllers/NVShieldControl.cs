@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 
 namespace HTWebRemoteHost.Devices.Controllers
 {
@@ -99,30 +97,6 @@ namespace HTWebRemoteHost.Devices.Controllers
             {
                 Util.ErrorHandler.SendError("Unable to execute adb command.");
             }
-        }
-    }
-
-    public static class ShellHelper
-    {
-        public static string Bash(this string cmd)
-        {
-            string escapedArgs = cmd.Replace("\"", "\\\"");
-
-            Process process = new Process()
-            {
-                StartInfo = new ProcessStartInfo
-                {
-                    FileName = "/bin/bash",
-                    Arguments = $"-c \"{escapedArgs}\"",
-                    RedirectStandardOutput = true,
-                    UseShellExecute = false,
-                    CreateNoWindow = true,
-                }
-            };
-            process.Start();
-            string result = process.StandardOutput.ReadToEnd();
-            process.WaitForExit();
-            return result;
         }
     }
 }

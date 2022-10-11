@@ -48,7 +48,10 @@ namespace HTWebRemoteHost.Devices
             string returnQuery = "";
             bool query = cmd.StartsWith("query:");
 
-            if (devName == "win") { }
+            if (devName == "pc")
+            {
+                PCControl.RunCmd(cmd);
+            }
             else if (devName == "keys") { }
             else if (devName == "wol")
             {

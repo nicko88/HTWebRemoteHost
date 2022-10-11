@@ -7,29 +7,38 @@ namespace HTWebRemoteHost.Devices.Controllers
 {
     class HttpGetControl
     {
-        public static void RunCmd(string IP, string cmd, string specialData)
+        public static void RunCmd(string IP, string cmd, string auth)
         {
-            using HttpClient httpClient = new HttpClient();
-            httpClient.Timeout = TimeSpan.FromSeconds(3);
-
-            if (!string.IsNullOrEmpty(specialData))
+            using (HttpClient httpClient = new HttpClient())
             {
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes(specialData)));
-            }
+                httpClient.Timeout = TimeSpan.FromSeconds(3);
 
-            HttpResponseMessage result;
-            try
-            {
-                result = httpClient.GetAsync($"{IP}{cmd}").Result;
-
-                if (!result.IsSuccessStatusCode)
+                if (!string.IsNullOrEmpty(auth))
                 {
-                    throw new Exception();
+                    if (auth.Contains("bearer"))
+                    {
+                        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", auth.Substring(7));
+                    }
+                    else
+                    {
+                        httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes(auth)));
+                    }
                 }
-            }
-            catch (Exception e)
-            {
-                Util.ErrorHandler.SendError($"Error sending http GET request to: {IP}{cmd}\n\n{e.Message}");
+
+                HttpResponseMessage result;
+                try
+                {
+                    result = httpClient.GetAsync($"{IP}{cmd}").Result;
+
+                    if (!result.IsSuccessStatusCode)
+                    {
+                        throw new Exception();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Util.ErrorHandler.SendError($"Error sending http GET request to: {IP}{cmd}\n\n{e.Message}");
+                }
             }
         }
     }
