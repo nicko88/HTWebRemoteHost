@@ -117,7 +117,7 @@ namespace HTWebRemoteHost.Devices
                     WemoPlugControl.RunCmd(IP, cmd);
                     break;
                 case "kasa":
-                    KasaControl.RunCmd(IP, cmd);
+                    KasaControl.RunCmd(IP, cmd, param, specialData);
                     break;
                 case "dm":
                     DMControl.RunCmd(IP, cmd, param);
@@ -159,7 +159,7 @@ namespace HTWebRemoteHost.Devices
                     PanaProjControl.RunCmd(IP, cmd, param);
                     break;
                 case "lgwebos":
-                    LGwebOSControl.RunCmd(IP, cmd, param);
+                    LGwebOSControl.RunCmd(IP, cmd, param, specialData);
                     break;
                 case "samsungtizen":
                     SamsungTizenControl.RunCmd(IP, cmd, param);
@@ -174,7 +174,7 @@ namespace HTWebRemoteHost.Devices
                     HDFuryControl.RunCmd(IP, cmd);
                     break;
                 case "minidsp-rs":
-                    MiniDSPrsControl.RunCmd(IP, cmd, param);
+                    MiniDSPrsControl.RunCmd(IP, cmd, param, specialData);
                     break;
                 case "rs232":
                     RS232Control.RunCmd($"/dev/{specialData}", cmd, param);
@@ -225,6 +225,9 @@ namespace HTWebRemoteHost.Devices
                         break;
                     case "kodi":
                         returnQuery = (string)Type.GetType("HTWebRemoteHost.Devices.Controllers.KodiControl").GetMethod(values[1]).Invoke(null, new object[] { IP, specialData });
+                        break;
+                    case "epson":
+                        returnQuery = (string)Type.GetType("HTWebRemote.Devices.Controllers.EpsonControl").GetMethod(values[0]).Invoke(null, new object[] { IP, values[1] });
                         break;
                     default:
                         break;
