@@ -14,10 +14,11 @@ namespace HTWebRemoteHost
     {
         private string IP;
         private readonly Thread httpThread;
+        private bool startFail = false;
 
         public HTWebRemoteHost()
         {
-            IP = ConfigHelper.GetLocalIPAddress();
+            IP = ConfigHelper.LocalIPAddress;
             Console.WriteLine($"Listening on: http://{IP}:5000");
 
             httpThread = new Thread(StartListen);
@@ -28,18 +29,29 @@ namespace HTWebRemoteHost
         {
             HttpListener listener = new HttpListener();
             listener.Prefixes.Add("http://*:5000/");
+
             try
             {
                 listener.Start();
             }
             catch
             {
-                Console.WriteLine("Cannot open Port: 5000\n\nTry running as root.");
-                Environment.Exit(0);
+                if (!startFail)
+                {
+                    startFail = true;
+                    Thread.Sleep(10000);
+                    StartListen();
+                }
+                else
+                {
+                    Console.WriteLine("Cannot open Port: 5000\n\nMaybe it's in use?");
+                    Environment.Exit(0);
+                }
             }
 
             while (true)
             {
+
                 IAsyncResult result = listener.BeginGetContext(new AsyncCallback(ProcessRequest), listener);
                 result.AsyncWaitHandle.WaitOne();
             }

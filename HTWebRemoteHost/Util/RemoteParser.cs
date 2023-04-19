@@ -277,6 +277,10 @@ namespace HTWebRemoteHost.Util
                     header = header.Replace("flex-direction: column;", "flex-direction: column-reverse;");
                     header = header.Replace("justify-content: flex-start;", "justify-content: space-between;");
                 }
+                else
+                {
+                    header = header.Replace("env(safe-area-inset-bottom)", "0");
+                }
             }
             catch { }
 
