@@ -6,11 +6,20 @@ using System.Text.RegularExpressions;
 
 namespace HTWebRemoteHost
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {
-            if (args.Length > 0)
+            if (args.Length == 0)
+            {
+                if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1)
+                {
+                    Process.GetCurrentProcess().Kill();
+                }
+
+                _ = new HTWebRemoteHost();
+            }
+            else
             {
                 try
                 {
@@ -51,23 +60,6 @@ namespace HTWebRemoteHost
                 {
                     Console.WriteLine($"Incorrect Parameters.");
                     Console.WriteLine(e.Message);
-                }
-            }
-            else
-            {
-                if (Process.GetProcessesByName(Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location)).Count() > 1)
-                {
-                    Process.GetCurrentProcess().Kill();
-                }
-                else
-                {
-                    try
-                    {
-                        File.Delete(Path.Combine(Util.ConfigHelper.WorkingPath, "errorlog.txt"));
-                    }
-                    catch { }
-
-                    _ = new HTWebRemoteHost();
                 }
             }
         }

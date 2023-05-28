@@ -24,6 +24,7 @@ namespace HTWebRemoteHost.Devices
                                                                     "htp1",
                                                                     "anthem",
                                                                     "lyngdorf",
+                                                                    "eiscp",
                                                                     "jvc",
                                                                     "sonyproj",
                                                                     "epson",
@@ -139,6 +140,9 @@ namespace HTWebRemoteHost.Devices
                     break;
                 case "lyngdorf":
                     LyngdorfControl.RunCmd(IP, cmd, param);
+                    break;
+                case "eiscp":
+                    EISCPControl.RunCmd(IP, cmd);
                     break;
                 case "jvc":
                     JVCControl.RunCmd(IP, cmd, param, specialData);
