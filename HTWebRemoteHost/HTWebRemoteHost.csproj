@@ -6,9 +6,9 @@
     <Authors>nicko88</Authors>
     <Copyright>nicko88</Copyright>
     <RepositoryUrl>https://github.com/nicko88/HTWebRemoteHost</RepositoryUrl>
-    <AssemblyVersion>1.8.2.1</AssemblyVersion>
-    <FileVersion>1.8.2.1</FileVersion>
-    <Version>1.8.2.1</Version>
+    <AssemblyVersion>1.9.0.0</AssemblyVersion>
+    <FileVersion>1.9.0.0</FileVersion>
+    <Version>1.9.0.0</Version>
     <AssemblyName>HTWebRemoteHost</AssemblyName>
     <RootNamespace>HTWebRemoteHost</RootNamespace>
     <Description>Simple remote control of your home theater devices and HTPC from any web browser</Description>

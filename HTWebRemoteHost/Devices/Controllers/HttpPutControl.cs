@@ -5,9 +5,9 @@ using System.Text;
 
 namespace HTWebRemoteHost.Devices.Controllers
 {
-    class HttpGetControl
+    class HttpPutControl
     {
-        public static void RunCmd(string IP, string cmd, string auth)
+        public static void RunCmd(string IP, string cmd, string param, string auth)
         {
             HttpClientHandler httpClientHandler = new HttpClientHandler();
             httpClientHandler.ServerCertificateCustomValidationCallback = (message, cert, chain, sslPolicyErrors) => { return true; };
@@ -31,16 +31,23 @@ namespace HTWebRemoteHost.Devices.Controllers
                 HttpResponseMessage result;
                 try
                 {
-                    result = httpClient.GetAsync($"{IP}{cmd}").Result;
+                    StringContent putData = null;
+
+                    if (!string.IsNullOrEmpty(param))
+                    {
+                        putData = new StringContent(param, Encoding.UTF8, "application/json");
+                    }
+
+                    result = httpClient.PutAsync($"{IP}{cmd}", putData).Result;
 
                     if (!result.IsSuccessStatusCode)
                     {
-                        Util.ErrorHandler.SendError($"Error sending http POST request to: {IP}{cmd}\n\nStatusCode: {result.StatusCode}\n\n{result.Content.ReadAsStringAsync().Result}");
+                        Util.ErrorHandler.SendError($"Error sending http PUT request to: {IP}{cmd}\n\nStatusCode: {result.StatusCode}\n\n{result.Content.ReadAsStringAsync().Result}");
                     }
                 }
                 catch (Exception e)
                 {
-                    Util.ErrorHandler.SendError($"Error sending http GET request to: {IP}{cmd}\n\n{e.AllMessages()}");
+                    Util.ErrorHandler.SendError($"Error sending http PUT request to: {IP}{cmd}\n\n{e.AllMessages()}");
                 }
             }
         }

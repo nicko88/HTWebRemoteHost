@@ -27,7 +27,7 @@ namespace HTWebRemoteHost.Devices.Controllers
             }
             catch (Exception e)
             {
-                Util.ErrorHandler.SendError($"Error sending WOL packet to: {mac}\n\n{e.Message}");
+                Util.ErrorHandler.SendError($"Error sending WOL packet to: {mac}\n\n{e.AllMessages()}");
             }
         }
     }

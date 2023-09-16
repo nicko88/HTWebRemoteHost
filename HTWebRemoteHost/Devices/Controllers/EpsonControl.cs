@@ -48,7 +48,7 @@ namespace HTWebRemoteHost.Devices.Controllers
             }
             catch (Exception e)
             {
-                Util.ErrorHandler.SendError($"Error parsing data: {dataResponse}\n\n{e.Message}");
+                Util.ErrorHandler.SendError($"Error parsing data: {dataResponse}\n\n{e.AllMessages()}");
             }
 
             return dataResponse;

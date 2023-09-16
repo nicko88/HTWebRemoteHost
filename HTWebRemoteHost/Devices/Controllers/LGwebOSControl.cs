@@ -1,7 +1,5 @@
 ﻿using System;
 using WebOsTv.Net;
-using WebOsTv.Net.Responses.Apps;
-using WebOsTv.Net.Responses.Tv;
 using WebOsTv.Net.Services;
 
 namespace HTWebRemoteHost.Devices.Controllers
@@ -25,7 +23,7 @@ namespace HTWebRemoteHost.Devices.Controllers
             }
             catch (Exception e)
             {
-                Util.ErrorHandler.SendError($"Error sending command to webOS.\n\n{e.Message}");
+                Util.ErrorHandler.SendError($"Error sending command to webOS.\n\n{e.AllMessages()}");
             }
         }
 
@@ -176,34 +174,13 @@ namespace HTWebRemoteHost.Devices.Controllers
                     case "poweroff":
                         await service.Control.SendIntentAsync(ControlService.ControlIntent.PowerOff);
                         break;
-                    case "applist":
-                        ShowAppList(service);
-                        break;
                     default:
                         break;
                 }
             }
             catch (Exception e)
             {
-                Util.ErrorHandler.SendError($"Error processing command:\n\ncmd={cmd}\nparam={param}\n\n{e.Message}");
-            }
-        }
-
-        private static async void ShowAppList(Service service)
-        {
-            ListLaunchPointsResponse.LaunchPoint[] applist = await service.Apps.ListAsync();
-            ExternalInputListResponse.Device[] inputlist = await service.Tv.ListInputsAsync();
-
-            Util.ErrorHandler.SendMsg("LGwebOS Apps:");
-            foreach (ListLaunchPointsResponse.LaunchPoint app in applist)
-            {
-                Util.ErrorHandler.SendMsg($"{app.Title}: appid={app.Id}");
-            }
-
-            Util.ErrorHandler.SendMsg("LGwebOS Inputs:");
-            foreach (ExternalInputListResponse.Device input in inputlist)
-            {
-                Util.ErrorHandler.SendMsg($"{input.Label}: appid={input.AppId}");
+                Util.ErrorHandler.SendError($"Error processing command:\n\ncmd={cmd}\nparam={param}\n\n{e.AllMessages()}");
             }
         }
     }

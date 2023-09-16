@@ -29,7 +29,7 @@ namespace HTWebRemoteHost.Devices.Controllers
             }
             catch (Exception e)
             {
-                Util.ErrorHandler.SendError($"Failed to send command to Wemo plug at {IP}\n\n{e.Message}");
+                Util.ErrorHandler.SendError($"Failed to send command to Wemo plug at {IP}\n\n{e.AllMessages()}");
             }
 
             if (!success)

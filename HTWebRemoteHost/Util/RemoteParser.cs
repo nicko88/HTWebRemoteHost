@@ -12,7 +12,7 @@ namespace HTWebRemoteHost.Util
     {
         public static string GetRemoteHTML(string remoteNum, bool withTabs)
         {
-            Remote remote = RemoteJSONLoader.LoadRemoteJSON(remoteNum);
+            Remote remote = JSONLoader.LoadRemoteJSON(remoteNum);
 
             if (withTabs)
             {

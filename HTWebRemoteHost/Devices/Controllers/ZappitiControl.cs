@@ -22,7 +22,7 @@ namespace HTWebRemoteHost.Devices.Controllers
             }
             catch (Exception e)
             {
-                Util.ErrorHandler.SendError($"Error sending command to Zappiti: http://{IP}:8080/remoteCmd?command={cmd}\n\n{e.Message}");
+                Util.ErrorHandler.SendError($"Error sending command to Zappiti: http://{IP}:8080/remoteCmd?command={cmd}\n\n{e.AllMessages()}");
             }
         }
     }

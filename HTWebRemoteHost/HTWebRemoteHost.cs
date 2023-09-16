@@ -119,7 +119,7 @@ namespace HTWebRemoteHost
             else if (!string.IsNullOrEmpty(btnIndex))
             {
                 string remoteID = request.QueryString["remoteID"];
-                Remote remote = RemoteJSONLoader.LoadRemoteJSON(remoteID);
+                Remote remote = JSONLoader.LoadRemoteJSON(remoteID);
 
                 remote.RemoteItems[Convert.ToInt32(btnIndex)].RunButtonCommands();
             }

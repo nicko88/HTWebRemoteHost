@@ -28,3 +28,22 @@ namespace HTWebRemoteHost.Util
         }
     }
 }
+
+namespace HTWebRemoteHost
+{
+    public static class ExceptionExtensions
+    {
+        public static string AllMessages(this Exception ex)
+        {
+            string allMessages = string.Empty;
+
+            while (ex.InnerException != null)
+            {
+                ex = ex.InnerException;
+                allMessages += ex.Message + "\n\n";
+            }
+
+            return allMessages;
+        }
+    }
+}

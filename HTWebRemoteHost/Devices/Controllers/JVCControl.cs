@@ -79,7 +79,7 @@ namespace HTWebRemoteHost.Devices.Controllers
                             }
                             catch (Exception e)
                             {
-                                Util.ErrorHandler.SendError($"Invalid JVC parameter\n\n{e.Message}");
+                                Util.ErrorHandler.SendError($"Invalid JVC parameter\n\n{e.AllMessages()}");
                             }
 
                             //end

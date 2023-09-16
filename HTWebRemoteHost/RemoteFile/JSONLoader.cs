@@ -3,7 +3,7 @@ using System.IO;
 
 namespace HTWebRemoteHost.RemoteFile
 {
-    class RemoteJSONLoader
+    class JSONLoader
     {
         public static Remote LoadRemoteJSON(string remoteID)
         {

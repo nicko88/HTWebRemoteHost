@@ -58,7 +58,7 @@ namespace HTWebRemoteHost.Devices.Controllers
             }
             catch (Exception e)
             {
-                Util.ErrorHandler.SendError($"Error converting hex values.\n\n{e.Message}");
+                Util.ErrorHandler.SendError($"Error converting hex values.\n\n{e.AllMessages()}");
             }
 
             return bytes.ToArray();
