@@ -208,7 +208,7 @@ namespace HTWebRemoteHost.Devices
                     HttpGetControl.RunCmd(IP, cmd, specialData);
                     break;
                 case "mqtt":
-                    MQTTControl.RunCmd(IP, cmd, param);
+                    MQTTControl.RunCmd(IP, cmd, param, specialData);
                     break;
                 default:
                     break;
@@ -259,7 +259,7 @@ namespace HTWebRemoteHost.Devices
             List<string> deviceNames = new List<string>();
             deviceNames.Add("Comment");
             deviceNames.Add("keys");
-            deviceNames.Add("win");
+            deviceNames.Add("pc");
             deviceNames.Add("wol");
 
             try

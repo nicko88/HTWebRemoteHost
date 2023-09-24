@@ -36,7 +36,7 @@ namespace HTWebRemoteHost.Devices.Controllers
 
                 EpsonSocket.SendData(Encoding.ASCII.GetBytes($"{cmd}\r"));
 
-                string initResponse = EpsonSocket.ReceiveData();
+                _ = EpsonSocket.ReceiveData();
                 dataResponse = EpsonSocket.ReceiveData();
 
                 EpsonSocket.CloseSocket();
