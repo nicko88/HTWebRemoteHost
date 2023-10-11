@@ -1,18 +1,14 @@
 #!/bin/bash
 
-case $(uname -m) in
-	*"arm"*)
-	file="HTWebRemoteHost_RasPi.zip"
-	;;
-	
-	*"aarch"*)
-	file="HTWebRemoteHost_RasPi64.zip"
-	;;
-	
-	*"x86_64"*)
-	file="HTWebRemoteHost_Linux.zip"
-	;;
-esac
+if [[ $(getconf LONG_BIT) =~ "32" ]]
+then
+    file="HTWebRemoteHost_RasPi.zip"
+elif [[ $(uname -m) =~ "aarch" ]]
+then
+    file="HTWebRemoteHost_RasPi64.zip"
+else
+    file="HTWebRemoteHost_Linux.zip"
+fi
 
 wget -O /tmp/$file https://github.com/nicko88/HTWebRemoteHost/releases/latest/download/$file
 rm /opt/HTWebRemoteHost/HTWebRemoteHost
