@@ -225,7 +225,7 @@ namespace HTWebRemoteHost.Devices
                 switch (devType)
                 {
                     case "dm":
-                        returnQuery = (string)Type.GetType("HTWebRemote.Devices.Controllers.DMControl").GetMethod(values[0]).Invoke(null, new object[] { IP, values[1] });
+                        returnQuery = (string)Type.GetType("HTWebRemoteHost.Devices.Controllers.DMControl").GetMethod(values[0]).Invoke(null, new object[] { IP, values[1] });
                         break;
                     case "storm":
                         returnQuery = (string)Type.GetType("HTWebRemoteHost.Devices.Controllers.StormControl").GetMethod(values[1]).Invoke(null, new object[] { IP });
@@ -243,7 +243,7 @@ namespace HTWebRemoteHost.Devices
                         returnQuery = (string)Type.GetType("HTWebRemoteHost.Devices.Controllers.KodiControl").GetMethod(values[1]).Invoke(null, new object[] { IP, specialData });
                         break;
                     case "epson":
-                        returnQuery = (string)Type.GetType("HTWebRemote.Devices.Controllers.EpsonControl").GetMethod(values[0]).Invoke(null, new object[] { IP, values[1] });
+                        returnQuery = (string)Type.GetType("HTWebRemoteHost.Devices.Controllers.EpsonControl").GetMethod(values[0]).Invoke(null, new object[] { IP, values[1] });
                         break;
                     default:
                         break;
