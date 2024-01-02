@@ -6,9 +6,9 @@
     <Authors>nicko88</Authors>
     <Copyright>nicko88</Copyright>
     <RepositoryUrl>https://github.com/nicko88/HTWebRemoteHost</RepositoryUrl>
-    <AssemblyVersion>1.9.0.3</AssemblyVersion>
-    <FileVersion>1.9.0.3</FileVersion>
-    <Version>1.9.0.3</Version>
+    <AssemblyVersion>1.9.1.0</AssemblyVersion>
+    <FileVersion>1.9.1.0</FileVersion>
+    <Version>1.9.1.0</Version>
     <AssemblyName>HTWebRemoteHost</AssemblyName>
     <RootNamespace>HTWebRemoteHost</RootNamespace>
     <Description>Simple remote control of your home theater devices and HTPC from any web browser</Description>
@@ -23,10 +23,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
     <PackageReference Include="MQTTnet" Version="3.1.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="System.IO.Ports" Version="7.0.0" />
+    <PackageReference Include="System.IO.Ports" Version="8.0.0" />
     <PackageReference Include="tplink-smartdevices" Version="2.0.1" />
     <PackageReference Include="WebSocketSharp-netstandard" Version="1.0.1" />
     <PackageReference Include="WemoNet" Version="1.4.5" />

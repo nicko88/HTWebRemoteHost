@@ -26,7 +26,7 @@ namespace HTWebRemoteHost.Devices.Controllers
             catch { }
 
             //get new token
-            if (samsungCFG is null)
+            if(samsungCFG is null)
             {
                 samsungCFG = GetSamsungConfig(IP);
             }
@@ -53,7 +53,8 @@ namespace HTWebRemoteHost.Devices.Controllers
                     {
                         samsungTizenSocket.ConnectAsync(new Uri(remoteEndpoint), new CancellationTokenSource().Token).Wait();
                         samsungTizenSocket.SendAsync(payload, WebSocketMessageType.Text, true, new CancellationTokenSource().Token).Wait();
-                        samsungTizenSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "CloseConnection", new CancellationTokenSource().Token).Wait();
+                        samsungTizenSocket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "CloseOutputConnection", new CancellationTokenSource().Token).Wait();
+                        samsungTizenSocket.Dispose();
                     }
                     catch (Exception e)
                     {
@@ -86,7 +87,7 @@ namespace HTWebRemoteHost.Devices.Controllers
                         {
                             _ = httpClient.DeleteAsync($"http://{IP}:8001/api/v2/applications/{param}").Result;
                         }
-                        catch (Exception e)
+                        catch(Exception e)
                         {
                             Util.ErrorHandler.SendError($"Failed sending command to Samsung TizenOS at {IP}\n\n{e.AllMessages()}");
                         }
@@ -149,7 +150,9 @@ namespace HTWebRemoteHost.Devices.Controllers
                                 config[1] = token;
                             }
 
-                            samsungTizenSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "CloseConnection", new CancellationTokenSource().Token).Wait();
+                            samsungTizenSocket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "CloseOutputConnection", new CancellationTokenSource().Token).Wait();
+                            samsungTizenSocket.Dispose();
+
                         }
                         catch (Exception e)
                         {
