@@ -135,7 +135,7 @@ namespace HTWebRemoteHost
             switch (request.RawUrl)
             {
                 case "/":
-                    RemoteID = "1";
+                    htmlPage = RemoteParser.GetGroupListHTML();
                     break;
                 case "/serial":
                     htmlPage = GetSerialPorts();
@@ -153,7 +153,7 @@ namespace HTWebRemoteHost
                     htmlPage = ErrorHandler.GetErrors();
                     break;
                 case "/version":
-                    htmlPage = "v" + Assembly.GetExecutingAssembly().GetName().Version.ToString().TrimEnd(new char[] { '.', '0' });
+                    htmlPage = "v" + Assembly.GetExecutingAssembly().GetName().Version.ToString().Replace(".0", "");
                     break;
                 case "/rebootpc":
                     "reboot".Bash();
@@ -172,7 +172,7 @@ namespace HTWebRemoteHost
                 RemoteID = request.QueryString["rID"];
             }
 
-            if (RemoteID != null)
+            if (!string.IsNullOrEmpty(RemoteID))
             {
                 htmlPage = RemoteParser.GetRemoteHTML(RemoteID, true);
             }
